@@ -2,42 +2,55 @@
 
 A Skyrim mod that adds wind physics to HDT-SMP.
 
-## Dependencies
+## Build Instructions And Requirements
 
-[ianpatt/common](https://github.com/ianpatt/common)
+- [CMake](https://cmake.org/)
+  - Add this to your `PATH`
+- [PowerShell](https://github.com/PowerShell/PowerShell/releases/latest)
+- [Vcpkg](https://github.com/microsoft/vcpkg)
+  - Add the environment variable `VCPKG_ROOT` with the value as the path to the folder containing vcpkg
+- [Visual Studio Community 2019](https://visualstudio.microsoft.com/)
+  - Desktop development with C++
+- [CommonLibSSENG](https://github.com/alandtse/CommonLibVR/tree/ng)
+  - Add this as as an environment variable `CommonLibSSEPath`
 
-[ianpatt/skse64](https://github.com/ianpatt/skse64)
+## User Requirements
 
-[jgernandt/hdtSMP64](https://github.com/jgernandt/hdtSMP64)
+- [Address Library for SKSE](https://www.nexusmods.com/skyrimspecialedition/mods/32444)
+  - Needed for SSE/AE
+- [VR Address Library for SKSEVR](https://www.nexusmods.com/skyrimspecialedition/mods/58101)
+  - Needed for VR
 
-## Build instructions
+## Register Visual Studio as a Generator
 
-Requires Visual Studio (toolset v142 (2019) recommended, v143 (2022) is probably also fine)
+- Open `x64 Native Tools Command Prompt`
+- Run `cmake`
+- Close the cmd window
 
-You'll need to build LIB files of common and skse64 and provide their paths, as well as the paths of their headers. Here's one way to do it:
-- Clone smp-wind and all dependencies into the same root directory
+## Building
+```
+# clone latest git
+git clone -b test https://github.com/Backporter/smp-wind.git
 
----
+# go into the directory
+cd smp-wind
 
-- Open skse64.sln (upgrade Windows SDK version if prompted)
-- Open the Configuration manager. Choose Release configuration and set project configurations to Release_VC142 (common, skse64) or Release_Lib_VC142 (skse64). Uncheck the "loader" projects from the build.
-- Open Project properties and make the following changes to the active configuration:  
-    - common_vc14:  
-        *General > Output directory*: change to **$(SolutionDir)\lib\Release**  
-        *General > Target name*: change to **common**  
-        *C/C++ > Additional include directories*: add **$(SolutionDir)..\common**;  
-    - skse64_common:  
-        *General > Output directory*: change to **$(SolutionDir)\lib\Release**  
-    - skse64:  
-        *General > Output directory*: change to **$(SolutionDir)\lib\Release**  
-        *General > Target name*: remove **_1_6_323**  
-        *Build events > Post-build event > Use in build*: change to **no**  
-- Build the solution. Repeat for Debug build if required.
+# init/update submodules 
+git submodule update --init --recursive
 
----
+# build target
+cmake --preset <Target>
 
-- Open smp-wind.sln
-- Open Project properties and make the following changes:  
-    *C/C++ > Additional include directories*: add **$(SolutionDir)..\common;** and **$(SolutionDir)..\skse64;**  
-    *Linker > Additional library directories*: add **$(SolutionDir)..\skse64\lib\\$(Configuration)\;**  
-- Build the solution.
+# build project
+cmake --build build --config <Mode>
+```
+
+## Build Targets
+vs2022-windows-nocuda
+vs2022-windows-nocuda-avx
+vs2022-windows-nocuda-avx2
+vs2022-windows-nocuda-avx512
+
+## Build Modes
+Debug
+Release

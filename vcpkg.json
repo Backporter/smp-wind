@@ -1,0 +1,15 @@
+{
+  "name": "smpwind",
+  "version": "1",
+  "dependencies": 
+  [
+    "directxtk",
+    "fmt",
+    "rapidcsv",
+    "detours",
+    "spdlog",
+    "bullet3",
+    "hdtsmp64",
+    "xbyak"
+  ]
+}
