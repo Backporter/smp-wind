@@ -46,11 +46,11 @@ cmake --build build --config <Mode>
 ```
 
 ## Build Targets
-vs2022-windows-nocuda
-vs2022-windows-nocuda-avx
-vs2022-windows-nocuda-avx2
-vs2022-windows-nocuda-avx512
+vs2022-windows-nocuda<br>
+vs2022-windows-nocuda-avx<br>
+vs2022-windows-nocuda-avx2<br>
+vs2022-windows-nocuda-avx51<br>
 
 ## Build Modes
-Debug
-Release
+Debug<br>
+Release<br>
